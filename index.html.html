@@ -1,0 +1,1046 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ananya Das - AI/ML Researcher & Developer</title>
+    <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --accent-1: #00ffff;
+            --accent-2: #ff00ff;
+            --accent-3: #00ff88;
+            --dark: #0a0a0f;
+            --darker: #050508;
+            --gray: #a0a0b0;
+            --light-gray: #1a1a24;
+            --card-bg: #0f0f18;
+        }
+
+        body {
+            font-family: 'Manrope', sans-serif;
+            background: var(--dark);
+            color: #e0e0e8;
+            overflow-x: hidden;
+        }
+
+        /* Noise texture overlay */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0.05;
+            z-index: 100;
+            pointer-events: none;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+        }
+
+        /* Animated grid background */
+        body::after {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                linear-gradient(rgba(0, 255, 255, 0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(0, 255, 255, 0.03) 1px, transparent 1px);
+            background-size: 50px 50px;
+            z-index: 0;
+            pointer-events: none;
+            animation: gridMove 20s linear infinite;
+        }
+
+        @keyframes gridMove {
+            0% { transform: translate(0, 0); }
+            100% { transform: translate(50px, 50px); }
+        }
+
+        /* Header */
+        header {
+            padding: 2.5rem 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 50;
+            background: rgba(10, 10, 15, 0.8);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(0, 255, 255, 0.1);
+            animation: slideDown 0.6s ease-out;
+        }
+
+        @keyframes slideDown {
+            from { transform: translateY(-100%); }
+            to { transform: translateY(0); }
+        }
+
+        .logo {
+            font-family: 'Archivo Black', sans-serif;
+            font-size: 1.4rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--accent-1);
+            text-shadow: 0 0 20px rgba(0, 255, 255, 0.5);
+        }
+
+        nav {
+            display: flex;
+            gap: 3rem;
+            align-items: center;
+        }
+
+        nav a {
+            color: #e0e0e8;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            position: relative;
+            transition: all 0.3s;
+        }
+
+        nav a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--accent-1);
+            box-shadow: 0 0 10px var(--accent-1);
+            transition: width 0.3s;
+        }
+
+        nav a:hover {
+            color: var(--accent-1);
+            text-shadow: 0 0 10px rgba(0, 255, 255, 0.5);
+        }
+
+        nav a:hover::after {
+            width: 100%;
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0 5%;
+            padding-top: 80px;
+            position: relative;
+            text-align: center;
+        }
+
+        .hero-content {
+            max-width: 900px;
+            margin: 0 auto;
+            width: 100%;
+        }
+
+        .hero-text {
+            animation: fadeInUp 0.8s ease-out 0.2s both;
+        }
+
+        .hero-badge {
+            display: inline-block;
+            padding: 0.5rem 1.2rem;
+            background: var(--dark);
+            color: white;
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 2rem;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .hero h1 {
+            font-family: 'Archivo Black', sans-serif;
+            font-size: clamp(3.5rem, 8vw, 6.5rem);
+            line-height: 1.1;
+            margin-bottom: 2rem;
+            text-transform: uppercase;
+            color: #ffffff;
+            text-shadow: 0 0 40px rgba(0, 255, 255, 0.3);
+        }
+
+        .hero h1 .highlight {
+            background: linear-gradient(135deg, var(--accent-1), var(--accent-2));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero-aim {
+            font-size: 1.5rem;
+            color: var(--gray);
+            line-height: 1.7;
+            margin-bottom: 3rem;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .resume-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.8rem;
+            padding: 1.4rem 3rem;
+            background: linear-gradient(135deg, var(--accent-1), var(--accent-2));
+            color: var(--dark);
+            text-decoration: none;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-size: 0.95rem;
+            transition: all 0.3s;
+            border: none;
+            cursor: pointer;
+            box-shadow: 0 0 30px rgba(0, 255, 255, 0.3);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .resume-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+            transition: left 0.5s;
+        }
+
+        .resume-btn:hover::before {
+            left: 100%;
+        }
+
+        .resume-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 0 50px rgba(0, 255, 255, 0.5);
+        }
+
+        .hero-stats,
+        .hero-description,
+        .hero-visual,
+        .tech-grid,
+        .tech-card,
+        .hero-cta {
+            display: none;
+        }
+
+        .btn {
+            padding: 1.2rem 2.5rem;
+            font-size: 0.9rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .btn-primary {
+            background: var(--card-bg);
+            color: var(--accent-1);
+            border: 2px solid var(--accent-1);
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 0 20px rgba(0, 255, 255, 0.2);
+        }
+
+        .btn-primary::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(0, 255, 255, 0.2), transparent);
+            transition: left 0.5s;
+        }
+
+        .btn-primary:hover::before {
+            left: 100%;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 0 40px rgba(0, 255, 255, 0.4);
+            background: rgba(0, 255, 255, 0.1);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--accent-2);
+            border: 2px solid var(--accent-2);
+            box-shadow: 0 0 20px rgba(255, 0, 255, 0.2);
+        }
+
+        .btn-secondary:hover {
+            background: rgba(255, 0, 255, 0.1);
+            box-shadow: 0 0 40px rgba(255, 0, 255, 0.4);
+        }
+
+        .hero-visual {
+            animation: fadeInUp 0.8s ease-out 0.4s both;
+        }
+
+        .tech-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1rem;
+        }
+
+        .tech-card {
+            padding: 1.5rem;
+            background: white;
+            border: 2px solid var(--light-gray);
+            transition: all 0.3s;
+        }
+
+        .tech-card:hover {
+            border-color: var(--accent-1);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(99, 102, 241, 0.1);
+        }
+
+        .tech-icon {
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .tech-name {
+            font-weight: 700;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        /* Experience Section */
+        .experience-section {
+            padding: 8rem 5%;
+            background: white;
+        }
+
+        .section-header {
+            max-width: 1400px;
+            margin: 0 auto 4rem;
+        }
+
+        .section-title {
+            font-family: 'Archivo Black', sans-serif;
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            text-transform: uppercase;
+            margin-bottom: 1rem;
+            color: #ffffff;
+            text-shadow: 0 0 30px rgba(0, 255, 255, 0.3);
+        }
+
+        .section-subtitle {
+            font-size: 1.2rem;
+            color: var(--gray);
+        }
+
+        .timeline {
+            max-width: 1400px;
+            margin: 0 auto;
+            position: relative;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 3px;
+            height: 100%;
+            background: linear-gradient(to bottom, var(--accent-1), var(--accent-2));
+        }
+
+        .timeline-item {
+            position: relative;
+            padding-left: 4rem;
+            margin-bottom: 4rem;
+            animation: fadeInUp 0.6s ease-out both;
+        }
+
+        .timeline-item:nth-child(1) { animation-delay: 0.1s; }
+        .timeline-item:nth-child(2) { animation-delay: 0.2s; }
+        .timeline-item:nth-child(3) { animation-delay: 0.3s; }
+        .timeline-item:nth-child(4) { animation-delay: 0.4s; }
+
+        .timeline-dot {
+            position: absolute;
+            left: -8px;
+            top: 0;
+            width: 20px;
+            height: 20px;
+            background: var(--accent-1);
+            border-radius: 50%;
+            border: 4px solid #fafafa;
+        }
+
+        .timeline-date {
+            display: inline-block;
+            padding: 0.3rem 1rem;
+            background: var(--accent-1);
+            color: white;
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 1rem;
+        }
+
+        .timeline-content h3 {
+            font-family: 'Archivo Black', sans-serif;
+            font-size: 1.8rem;
+            text-transform: uppercase;
+            margin-bottom: 0.5rem;
+        }
+
+        .timeline-company {
+            font-size: 1.1rem;
+            color: var(--accent-2);
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+
+        .timeline-description {
+            color: var(--gray);
+            line-height: 1.7;
+            margin-bottom: 1rem;
+        }
+
+        .timeline-description li {
+            margin-bottom: 0.5rem;
+        }
+
+        /* Research Section */
+        .research-section {
+            padding: 8rem 5%;
+            background: var(--darker);
+            color: white;
+            position: relative;
+        }
+
+        .research-content {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .research-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
+            gap: 3rem;
+            margin-top: 4rem;
+        }
+
+        .research-card {
+            padding: 3rem;
+            background: var(--card-bg);
+            border: 2px solid rgba(0, 255, 255, 0.2);
+            transition: all 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .research-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(0, 255, 255, 0.05), rgba(255, 0, 255, 0.05));
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .research-card:hover::before {
+            opacity: 1;
+        }
+
+        .research-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--accent-1);
+            box-shadow: 0 0 40px rgba(0, 255, 255, 0.3);
+        }
+
+        .research-tag {
+            display: inline-block;
+            padding: 0.4rem 1rem;
+            background: linear-gradient(135deg, var(--accent-1), var(--accent-2));
+            color: var(--dark);
+            font-size: 0.7rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 0 20px rgba(0, 255, 255, 0.3);
+            position: relative;
+            z-index: 1;
+        }
+
+        .research-card h3 {
+            font-family: 'Archivo Black', sans-serif;
+            font-size: 1.5rem;
+            text-transform: uppercase;
+            margin-bottom: 1rem;
+            line-height: 1.2;
+            position: relative;
+            z-index: 1;
+            color: #ffffff;
+        }
+
+        .research-card p {
+            opacity: 0.8;
+            line-height: 1.7;
+            margin-bottom: 1.5rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .research-link {
+            color: var(--accent-1);
+            text-decoration: none;
+            font-weight: 700;
+            text-transform: uppercase;
+            font-size: 0.85rem;
+            letter-spacing: 0.5px;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            position: relative;
+            z-index: 1;
+            transition: all 0.3s;
+        }
+
+        .research-link:hover {
+            gap: 1rem;
+            text-shadow: 0 0 10px var(--accent-1);
+        }
+
+        /* Projects Section */
+        .projects-section {
+            padding: 8rem 5%;
+            background: var(--dark);
+        }
+
+        .projects-grid {
+            max-width: 1400px;
+            margin: 4rem auto 0;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(450px, 1fr));
+            gap: 3rem;
+        }
+
+        .project-card {
+            background: var(--card-bg);
+            border: 3px solid var(--accent-1);
+            padding: 3rem;
+            transition: all 0.3s;
+            position: relative;
+            box-shadow: 0 0 30px rgba(0, 255, 255, 0.2);
+        }
+
+        .project-card::before {
+            content: '';
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            right: -10px;
+            bottom: -10px;
+            background: rgba(0, 255, 255, 0.1);
+            z-index: -1;
+            transition: all 0.3s;
+        }
+
+        .project-card:hover::before {
+            top: 15px;
+            left: 15px;
+            background: rgba(0, 255, 255, 0.15);
+        }
+
+        .project-card:hover {
+            transform: translate(-5px, -5px);
+            box-shadow: 0 0 50px rgba(0, 255, 255, 0.4);
+        }
+
+        .project-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 1.5rem;
+        }
+
+        .project-icon {
+            font-size: 2.5rem;
+        }
+
+        .project-tags {
+            display: flex;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+        }
+
+        .project-tag {
+            padding: 0.3rem 0.8rem;
+            background: linear-gradient(135deg, var(--accent-1), var(--accent-2));
+            color: var(--dark);
+            font-size: 0.7rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            box-shadow: 0 0 15px rgba(0, 255, 255, 0.3);
+        }
+
+        .project-card h3 {
+            font-family: 'Archivo Black', sans-serif;
+            font-size: 1.8rem;
+            text-transform: uppercase;
+            margin-bottom: 1rem;
+            color: #ffffff;
+        }
+
+        .project-description {
+            color: var(--gray);
+            line-height: 1.7;
+            margin-bottom: 1.5rem;
+        }
+
+        .project-tech {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.8rem;
+            margin-top: 1.5rem;
+            padding-top: 1.5rem;
+            border-top: 2px solid rgba(0, 255, 255, 0.2);
+        }
+
+        .tech-badge {
+            padding: 0.4rem 1rem;
+            background: rgba(0, 255, 255, 0.1);
+            border: 1px solid var(--accent-1);
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: var(--accent-1);
+        }
+
+        /* Contact Section */
+        .contact-section {
+            padding: 8rem 5%;
+            background: linear-gradient(135deg, rgba(0, 255, 255, 0.1), rgba(255, 0, 255, 0.1));
+            border-top: 2px solid rgba(0, 255, 255, 0.2);
+            color: white;
+            text-align: center;
+        }
+
+        .contact-content {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .contact-content h2 {
+            font-family: 'Archivo Black', sans-serif;
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            text-transform: uppercase;
+            margin-bottom: 1.5rem;
+            text-shadow: 0 0 40px rgba(0, 255, 255, 0.3);
+        }
+
+        .contact-content p {
+            font-size: 1.3rem;
+            margin-bottom: 3rem;
+            opacity: 0.9;
+        }
+
+        .contact-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .contact-btn {
+            padding: 1.2rem 2.5rem;
+            background: var(--card-bg);
+            color: var(--accent-1);
+            border: 2px solid var(--accent-1);
+            text-decoration: none;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            font-size: 0.9rem;
+            transition: all 0.3s;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.8rem;
+            box-shadow: 0 0 20px rgba(0, 255, 255, 0.2);
+        }
+
+        .contact-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 0 40px rgba(0, 255, 255, 0.4);
+            background: rgba(0, 255, 255, 0.1);
+        }
+
+        /* Footer */
+        footer {
+            padding: 3rem 5%;
+            background: var(--darker);
+            color: white;
+            text-align: center;
+            border-top: 1px solid rgba(0, 255, 255, 0.1);
+        }
+
+        .footer-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .footer-text {
+            opacity: 0.7;
+            font-size: 0.9rem;
+        }
+
+        .footer-links {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .footer-links a {
+            color: var(--accent-1);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.9rem;
+            transition: all 0.3s;
+        }
+
+        .footer-links a:hover {
+            color: var(--accent-2);
+            text-shadow: 0 0 10px rgba(255, 0, 255, 0.5);
+        }
+
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .tech-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+
+            .projects-grid,
+            .research-grid {
+                grid-template-columns: 1fr;
+            }
+
+            nav {
+                gap: 1.5rem;
+            }
+        }
+
+        @media (max-width: 640px) {
+            header {
+                flex-direction: column;
+                gap: 1rem;
+                padding: 1.5rem 5%;
+            }
+
+            nav {
+                gap: 1rem;
+            }
+
+            nav a {
+                font-size: 0.75rem;
+            }
+
+            .tech-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .timeline-item {
+                padding-left: 2.5rem;
+            }
+
+            .contact-links {
+                flex-direction: column;
+            }
+
+            .footer-content {
+                flex-direction: column;
+                gap: 2rem;
+            }
+
+            .project-header {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero-aim {
+                font-size: 1.1rem;
+            }
+        }
+
+        /* Scroll animations */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s ease-out;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo">Ananya Das</div>
+        <nav>
+            <a href="#research">Research</a>
+            <a href="#projects">Personal Work</a>
+            <a href="#contact">Contact</a>
+        </nav>
+    </header>
+
+    <section class="hero" id="home">
+        <div class="hero-content">
+            <div class="hero-text">
+                <h1>Ananya Das</h1>
+                <p class="hero-aim">
+                    Building intelligent systems through AI/ML research — from deep reinforcement learning 
+                    to computer vision — creating solutions that push the boundaries of what's possible.
+                </p>
+                <a href="ANANYA_DAS_RESUME (3).pdf" 
+                    download="ANANYA_DAS_RESUME (3).pdf" 
+                class="resume-btn">
+                 Download Resume
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <section class="research-section" id="research">
+        <div class="research-content">
+            <div class="section-header">
+                <h2 class="section-title">Research</h2>
+                <p class="section-subtitle">Published work and ongoing research projects</p>
+            </div>
+
+            <div class="research-grid">
+                <div class="research-card fade-in">
+                    <span class="research-tag">AAAI 2026</span>
+                    <h3>DilAtSE-Net: An Encoder Decoder Network for Burnt Area Delineation</h3>
+                    <p>
+                        Research paper on AI for Environmental Science accepted at AAAI 2026 AI4ES. 
+                        Developed a novel AI model for burnt area delineation obtaining Dice coefficient 
+                        of 0.9297 with only 12.8M parameters.
+                    </p>
+                    <a href="https://openreview.net/forum?id=ouELtKQ2mh" 
+   target="_blank" 
+   rel="noopener noreferrer" 
+   class="research-link">
+   Read on OpenReview →
+</a>
+                </div>
+
+                <div class="research-card fade-in">
+                    <span class="research-tag">In Progress</span>
+                    <h3>Self-Supervised Learning for Multispectral Satellite Imagery</h3>
+                    <p>
+                        Developing novel self-supervised learning approaches for multispectral satellite 
+                        imagery analysis in the domain of power generation estimation. Exploring contrastive 
+                        learning and masked autoencoders for improved feature representation in renewable 
+                        energy monitoring applications.
+                    </p>
+                </div>
+
+                <div class="research-card fade-in">
+                    <span class="research-tag">In Progress</span>
+                    <h3>Novel Algorithm for DRL-Based Halftoning</h3>
+                    <p>
+                        Researching Deep Reinforcement Learning based halftoning algorithms for diffusion 
+                        models with focus on inference time loss optimization and perception safety. 
+                        Applications include brand-aware logo generation and flexible packaging design 
+                        with constrained image synthesis.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="projects-section" id="projects">
+        <div class="section-header">
+            <h2 class="section-title">Personal Work</h2>
+            <p class="section-subtitle">Building impactful solutions with AI and technology</p>
+        </div>
+
+        <div class="projects-grid">
+            <div class="project-card fade-in">
+                <div class="project-header">
+                    <div class="project-icon">⚖️</div>
+                    <div class="project-tags">
+                        <span class="project-tag">Legal Tech</span>
+                        <span class="project-tag">AI</span>
+                    </div>
+                </div>
+                <h3>JustifAI</h3>
+                <p class="project-description">
+                    Built an inclusive legal-tech platform with WhatsApp voice + AI-IVR intake, using ASR, 
+                    multilingual translation, and intent classification to structure and store legal grievances. 
+                    Developed a law-student and pro-bono matchmaking system with AI case summarization, 
+                    smart filtering, and seamless student–lawyer–firm connections.
+                </p>
+                <div class="project-tech">
+                    <span class="tech-badge">Python</span>
+                    <span class="tech-badge">Node.js</span>
+                    <span class="tech-badge">React</span>
+                    <span class="tech-badge">Next.js</span>
+                </div>
+            </div>
+
+            <div class="project-card fade-in">
+                <div class="project-header">
+                    <div class="project-icon">✈️</div>
+                    <div class="project-tags">
+                        <span class="project-tag">B2B</span>
+                        <span class="project-tag">Fraud Detection</span>
+                    </div>
+                </div>
+                <h3>Voyager</h3>
+                <p class="project-description">
+                    Built a B2B travel platform targeting early fraud detection and credit risk using 
+                    AI algorithms built on behavioral trends of target agencies and external signals 
+                    for credit risk assessment.
+                </p>
+                <div class="project-tech">
+                    <span class="tech-badge">Python</span>
+                    <span class="tech-badge">scikit-learn</span>
+                    <span class="tech-badge">Node.js</span>
+                    <span class="tech-badge">HMM</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="contact-section" id="contact">
+        <div class="contact-content">
+            <h2>Let's Connect</h2>
+            <div class="contact-links">
+                <button class="contact-btn" id="emailBtn">
+                    📧 Email
+                </button>
+                <a href="https://www.linkedin.com/in/ananya122006das" target="_blank" rel="noopener noreferrer" class="contact-btn">
+                    💼 LinkedIn
+                </a>
+            </div>
+            <div id="emailCopied" style="margin-top: 1rem; color: var(--accent-1); font-weight: 600; opacity: 0; transition: opacity 0.3s;">
+                Email copied to clipboard!
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-text">© 2026 Ananya Das. All rights reserved.</div>
+            <div class="footer-links">
+                <a href="#home">Home</a>
+                <a href="#research">Research</a>
+                <a href="#projects">Personal Work</a>
+                <a href="#contact">Contact</a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Email copy to clipboard
+        document.getElementById('emailBtn').addEventListener('click', function() {
+            const email = 'ananya122006@gmail.com';
+            navigator.clipboard.writeText(email).then(() => {
+                const copiedMsg = document.getElementById('emailCopied');
+                copiedMsg.style.opacity = '1';
+                setTimeout(() => {
+                    copiedMsg.style.opacity = '0';
+                }, 2000);
+            }).catch(err => {
+                // Fallback for older browsers
+                const tempInput = document.createElement('input');
+                tempInput.value = email;
+                document.body.appendChild(tempInput);
+                tempInput.select();
+                document.execCommand('copy');
+                document.body.removeChild(tempInput);
+                
+                const copiedMsg = document.getElementById('emailCopied');
+                copiedMsg.style.opacity = '1';
+                setTimeout(() => {
+                    copiedMsg.style.opacity = '0';
+                }, 2000);
+            });
+        });
+
+        // Smooth scrolling
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            });
+        });
+
+        // Scroll animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+    </script>
+</body>
+</html>
